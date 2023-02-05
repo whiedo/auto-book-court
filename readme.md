@@ -27,3 +27,4 @@ Jenkins-URL: http://localhost:8080/
 Jenkins-Docker-Container-Adm: admin, de651299ddca40499db183672dea7350
 Add new Multibranch Pipeline
 -Add GitHub credentials and GitHub repository
+Settings -> Plugins -> Install docker pipelines
