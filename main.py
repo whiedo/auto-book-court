@@ -7,13 +7,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import WebDriverException
+import json
+
+with open('./eversports.json') as eversports:
+    data = json.load(eversports)
+    EVERSPORTS_MAIL = data["email"]
+    EVERSPORTS_PW = data["password"]
 
 RECONNECT_ATTEMPTS = 3
 DEBUG_MODE = False
 
 SPORTCENTER_KAUTZ_SQUASH_URL = "https://www.eversports.de/widget/w/qc7bpq?sport=squash"
-EVERSPORTS_MAIL = "XXXX"
-EVERSPORTS_PW = "XXXX"
 
 AMS_MARISA_WEEKDAY_FROM = 1
 AMS_MARISA_WEEKDAY_TO = 4
@@ -125,9 +129,9 @@ def book_time_slot(driver, time_slot):
     login(driver)
     checkForErrorAfterLogin(driver)
     addVoucher(driver)
-    pay(driver)
+    choosePaymentMethod(driver)
 
-    sleep(0.5)t
+    sleep(0.5)
     time_slot_start = time_slot.get_attribute("data-startdate") + " " + time_slot.get_attribute("data-start")
     time_slot_start_dt = datetime.strptime(time_slot_start, "%Y-%m-%d %H%M")
     print("INFO: Slot " + time_slot_start_dt.strftime("%Y-%m-%d %H:%M") + " booked.")
@@ -152,7 +156,7 @@ def addVoucher(driver):
     driver.find_element(By.NAME, "voucher").send_keys("clever")
     driver.find_element(By.XPATH, "//button[normalize-space()='Gutschein einlösen']").click()
 
-def pay(driver):
+def choosePaymentMethod(driver):
     driver.find_element(By.XPATH, "//button[@data-testid='continue'][normalize-space()='Zahlungsart wählen']").click()
     driver.implicitly_wait(5)
     checkForErrorAfterChosingPaymentMethod(driver)
