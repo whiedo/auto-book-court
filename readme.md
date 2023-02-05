@@ -4,6 +4,16 @@ Downloads:
 -Docker for Desktop
 -Git for Windows
 
+VSCode/Git:
+git init
+git add --all
+git config --global user.email f_elix@web.de
+git config --global user.name Felix
+git commit -m "inital commit"
+git remote add origin https://github.com/whiedo/auto-book-court.git
+git branch -M master
+git push --set-upstream origin master
+
 Docker:
 docker pull jenkins/jenkins
 docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 --restart=on-failure jenkins/jenkins
