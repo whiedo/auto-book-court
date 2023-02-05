@@ -38,6 +38,8 @@ def book_squash():
 
     driver = webdriver.Chrome(options=chrome_options)
 
+    print(DEBUG_MODE)
+
     attempts = 0
     while attempts < RECONNECT_ATTEMPTS:
         try:
@@ -51,7 +53,6 @@ def book_squash():
     print("------------------------------------------")
 
     title = driver.title
-    print(title)
     assert title == "Online-Buchung"
 
     driver.implicitly_wait(5)
@@ -119,7 +120,7 @@ def time_slot_suitable(time_slot):
     if not check_if_time_is_good(1, 5, time_slot_start_dt):
         return False
 
-    print("Suitable slot at: " + time_slot_start_dt.strftime("%Y-%m-%d %H:%M"))
+    print("INFO: Suitable slot at: " + time_slot_start_dt.strftime("%Y-%m-%d %H:%M"))
 
     return True
 
